@@ -1,0 +1,70 @@
+﻿Tin Sn,11,220,57
+Overview of materials for Low Alloy Steel,110 - 2400,180 - 2730,1.00 - 40.0
+Overview of materials for Austenitic,25.0 - 2400,105 - 3000,2.00 - 62.0
+Overview of materials for Chrome-moly Steel,275 - 2070,485 - 2650,10.0 - 20.0
+Overview of materials for Martensitic,205 - 1910,345 - 2350,2.00 - 40.0
+Overview of materials for Stainless Steel,25.0 - 2500,34.5 - 3100,0.000 - 62.0
+Overview of materials for Precipitation Hardening Stainless,255 - 2500,310 - 3100,0.000 - 18.0
+Overview of materials for T 300 Series Stainless Steel,138 - 1800,34.5 - 2200,28.0 - 62.0
+Overview of materials for T 400 Series Stainless Steel,165 - 1900,280 - 2070,2.00 - 40.0
+Overview of materials for Hot Work Steel,800 - 1900,1010 - 2310,10.0 - 16.0
+Overview of materials for Mold Steel,689 - 2310,441 - 2000,8.00 - 17.0
+Overview of materials for Aluminum Alloy,1.24 - 730,0.700 - 1600,2.50 - 15.0
+Overview of materials for Cobalt Alloy,207 - 2280,80.0 - 2540,0.000 - 3.50
+Overview of materials for Copper Alloy,0.250 - 1520,0.250 - 1590,5.00 - 15.0
+"Aluminum 4019, AE Condition",300,400,2.5
+Aluminum 7034-T6,730,750,8
+"Aluminum 8009, AE Condition",385,450,15
+Delphi K-Alloy A304 Casting Alloy,159 - 172,290 - 296,5.00 - 14.0
+Dura-Bar 65-45-12 HRDS Continuously Cast Ductile Iron Bar Stock ASTM A536,310,448,12
+International Mold Steel Superplast® Stainless Plastic and Rubber Mold Steel,890,1000,14
+NiCoForm NiColoy® E Electroformed Nickel-Cobalt,758 - 965,1100,1
+PSM Industries PolyAlloys MIM-2200 sintered Low Alloy Steel,110 - 124,255 - 290,20.0 - 40.0
+PSM Industries PolyAlloys MIM-2700 sintered Low Alloy Steel,207 - 255,379 - 414,20.0 - 26.0
+PSM Industries PolyAlloys MIM-4605 sintered Low Alloy Steel,172 - 207,379 - 441,11.0 - 15.0
+PSM Industries PolyAlloys MIM-4605 quench/temper Low Alloy Steel,1310 - 1480,1480 - 1650,1.00 - 2.00
+PSM Industries PolyAlloys MIM-316L sintered Stainless Steel,138 - 172,448 - 517,40.0 - 50.0
+PSM Industries PolyAlloys MIM-430L sintered Stainless Steel,207 - 241,345 - 414,20.0 - 25.0
+PSM Industries PolyAlloys MIM-17-4PH sintered Stainless Steel,648 - 731,793 - 896,4.00 - 6.00
+PSM Industries PolyAlloys MIM-14-4PH Heat Treated Stainless Steel,965 - 1090,1070 - 1190,4.00 - 6.00
+PSM Industries PolyAlloys MIM-2200 Soft Magnetic Steel,124,290,40
+PSM Industries PolyAlloys MIM-Fe-50%Ni Grade 1 Soft Magnetic Steel,159,455,30
+PSM Industries PolyAlloys MIM-Fe-50%Ni Grade 2 Soft Magnetic Steel,159,455,30
+PSM Industries PolyAlloys MIM-Fe-%3Si Grade 1 Soft Magnetic Steel,393,531,24
+PSM Industries PolyAlloys MIM-Fe-%3Si Grade 2 Soft Magnetic Steel,393,531,24
+PSM Industries PolyAlloys MIM-Fe-50%Co Soft Magnetic Steel,138,207,1
+PSM Industries PolyAlloys MIM-430L sintered Soft Magnetic Steel,241,414,25
+Schmolz + Bickenbach Formadur® PH X Superclean Plastic Mold Steel,1100 - 1210,1120 - 1240,12.2 - 12.8
+Schmolz + Bickenbach CorroPlast® Plastic Mold Steel,889,1100,13
+Schmolz + Bickenbach Thermodur® 2344 Magnum Hot Work Die Steel,1170 - 1520,1380 - 1790,12.0 - 14.0
+Schmolz + Bickenbach Thermodur® E38K Hot Work Die Steel,1170 - 1450,1410 - 1810,12.0 - 14.0
+Schmolz + Bickenbach Thermodur® 2367 Superclean Hot Work Die Steel,1180 - 1550,1400 - 1840,12.0 - 13.0
+Schmolz + Bickenbach Thermodur® 2714 Extra Fine Structure - Hot Work Die Steel,1030 - 1370,1210 - 1590,13.0 - 16.0
+Schmolz + Bickenbach MoldMAX LH® Low Hard - Copper Alloy,758,965,15
+Schmolz + Bickenbach MoldMAX HH® High Hard - Copper Alloy,1000,1170,5
+Schmolz + Bickenbach MoldMAX XL® Copper Alloy,724,793,6
+Schmolz + Bickenbach MoldMAX® V Copper Alloy,724,862,7
+Schmolz + Bickenbach MoldMAX® SC Copper Alloy,621,724,15
+Schmolz + Bickenbach UGIMA® 303 Stainless Steel Bar,241 - 689,586 - 827,30.0 - 50.0
+Schmolz + Bickenbach UGIMA® 303 HD Stainless Steel Bar,241 - 689,586 - 827,30.0 - 50.0
+Schmolz + Bickenbach UGIMA 303 UX® Stainless Steel Bar,172 - 655,517 - 793,30.0 - 50.0
+Schmolz + Bickenbach UGIMA 304/304L® Stainless Steel Bar,241 - 552,552 - 793,40.0 - 50.0
+Schmolz + Bickenbach UGIMA® 304 Cu Stainless Steel Bar,207 - 621,483 - 724,28.0 - 62.0
+Schmolz + Bickenbach UGIMA® 316/316L Stainless Steel Bar,207 - 655,517 - 793,30
+Schmolz + Bickenbach 416 Stainless Steel Bar,448 - 896,621 - 1030,10.0 - 40.0
+Schmolz + Bickenbach 430FR Stainless Steel Bar,310 - 448,448 - 552,25
+Schmolz + Bickenbach UGIMA® 630 Stainless Steel Bar,517 - 1070,793 - 1310,0.000 - 18.0
+Schmolz + Bickenbach IMRE™ Stainless Steel Bar,345 - 517,483 - 621,30
+Schmolz + Bickenbach LeanDup™ 35N Stainless Steel Bar,379 - 1500,655 - 1700,2.00 - 50.0
+Schmolz + Bickenbach UgiPerm™ 12FM Stainless Steel Bar,310 - 448,448 - 552,30
+Schmolz + Bickenbach 416RS Stainless Steel Bar,448 - 889,621 - 986,2.00 - 4.00
+EDRO RoyAlloy™ #6 Free Machining Stainless Holder Steel,889,1070,12
+EDRO EDRO400™ #40 Prehardened Insert Quality Martensitic Stainless Steel,1010,1300,13
+EDRO P1FM #31 Free Machining Holder Steel,800,945,18
+EDRO #2 Prehardened 4130 Holder Block,800,1010,18
+EDRO UltraChem® #15 Precipitation Hardening Stainless Mold Steel,1210,1310,14
+EDRO UltraChem® ESR #16 Precipitation Hardening Stainless Mold Steel,1210,1310,14
+EDRO #3 Prehardened Mold Quality P20 Alloy Steel,800,1010,20
+EDRO #8 Premium 420 Stainless Mold Steel,1280 - 1610,1420 - 2070,8.00 - 12.0
+EDRO #5 H13-Hot Work Tool Steel,1280 - 1520,1420 - 1810,10.0 - 12.0
+EDRO #45 Free Machining Carbon Steel,386,662,20
