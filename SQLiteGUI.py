@@ -18,36 +18,50 @@ from multiprocessing.managers import BaseManager
  Datbase is based off of SQLite3
  GUI is written in tkinter
 
+ ------FEATURES V1.2.0--------
+ 	1/13/2021
+ - Now connected to Battery and Propulsion team one drive! Multiple people can now use and update the same database. 
+ 		Please make sure you are synced to the Battery & Propulsion Team general folder. Please check to see if your path to the materials database would be:
+ 		"C:/Users/<YOUR USENAME>/Lordstown Motors Corp/Battery & Propulsion Team - General/Documents/materials.db"
+ 		ONLY PEOPLE ON THE PROPULSION TEAM CAN ACCESS THIS DATABASE
+ - Created an executable file for easier use! Please ensure that you have the LMCMaterialsDatabase.exe and Lordstown.ico in the same folder
+ 		You can make a shortcut the the datbase exe and leave it on your desktop
+
  ------FEATURES V1.0.1--------
- Add materials to database, if empty then will leave the corresponding area in the database blank, still able to edit later
- Search database based on any of the mechanical properties or a combination of any of the properties 
+ 	1/8/2021
+ - Added a search page refresh button to see any updates
+
+  ------FEATURES V1.0.0--------
+  	1/6/2021
+ - Add materials to database, if empty then will leave the corresponding area in the database blank, still able to edit later
+ - Search database based on any of the mechanical properties or a combination of any of the properties 
  		Search based on input being in range, or known material property being within bounds we list
  		Set the MIN MAX values of the property, or have the input listed be checked to be in the min max values of the material
  		Leave inputs blank to search 
  		Opens a seperate window for you to explore your search results
  		Refresh button for Search results to see yourself edit, add, or remove entries into the database
- Edit or Delete an entry based on known ID #
+ - Edit or Delete an entry based on known ID #
  		New window pops up when button is pressed 
  		Can update individual values or many at once for a single database entry
  		Commit changes and click refresh button on the search window to see the value be updated
- 		Delete buggy when not deleting the last entry # when clicking refresh on the search window but database does update just exit search and do it again to see proper changes
 
  TODO
  - Add more mechanical properties: Density, Thermal Conductivity, Electrical Conductivity, Melting Point, Youngs Modulus, Specific Heat Capacity
  - Implement features to search for either chemical properties/composition or mechanical properties or both
- - Implement a better "close enough" name search
+ - Implement a better "close enough" name search instead of just contains
  - Plan to have a less memory intensive way of looking at all entries without having to list them all at once
- - Have a main menu rather than a mish mash of stuff together
+ - Have a main menu
  - Find more data to add to database
  - Implement Entry box sanity checkers to ensure only correct input is passed through
- - Make an executable
  - Bug fix refresh button, deleting/adding an entry will sometimes make it so the scrolling window doesn't resize properly but does update the actual database still
 
 
 """
 
-
+#Getting path relative to individual's computer
 databaseroute = os.path.join(os.path.expanduser("~"),"Lordstown Motors Corp", "Battery & Propulsion Team - General","Documents", "materials.db")
+
+#Creating main menu
 root = Tk()
 root.title('Lordstown Motors Materials Database')
 root.geometry("900x650")
@@ -56,7 +70,7 @@ root["bg"] = "#42414A"
 
 entryedits = []
 
-
+#Default formatting functions to format labels, entries, buttons, and checks
 def labelformat(labels):
 	for i in labels:
 		i.configure(bg = "#42414A", fg = "white")
@@ -73,11 +87,12 @@ def checkformat(checks):
 	for i in mychecks:
 		i.configure(bg = "#42414A", fg = "white", selectcolor = "#42414A", activebackground = "#42414A", activeforeground = "white")
 
+#Clear textbox entries
 def clearentries(entries):
 	for i in entries:
 		i.delete(0,END)
 
-
+#Send and insert query to the materials database
 def submit():
 	conn = sqlite3.connect(databaseroute)
 	c = conn.cursor()
@@ -87,7 +102,7 @@ def submit():
 	conn.commit()
 	clearentries(myentries)
 
-
+#Check if any entries are empty
 def isempty(inputs):
 	output = False
 	for i in inputs:
@@ -97,7 +112,9 @@ def isempty(inputs):
 	return output
 
 
-
+#Opens up a new search window and show results on a scrollable table
+# c - our connection cursor to the database
+# sql - our query statement
 def displaysearch(c,sql):
 	c.execute(sql)
 	rows = c.fetchall()
@@ -122,6 +139,7 @@ def displaysearch(c,sql):
 	canvas = Canvas(frame_canvas, bg="white")
 	canvas.grid(row=0, column=0, ipady = 80, sticky="news")
 
+	#Creating the scrollbar for the table
 	vsb = Scrollbar(frame_canvas, orient="vertical", command=canvas.yview)
 	vsb.grid(row=0, column=1, sticky='nws')
 	canvas.configure(yscrollcommand=vsb.set)
@@ -134,6 +152,7 @@ def displaysearch(c,sql):
 	canvas.create_window((0, 0), window=table)
 	resultstable = [[Label() for i in range (len(rows[0]))] for i in range(len(rows)) ]
 
+	#Creating table x axis labels
 	iDtableLabel = Label(table, text = "ID #")
 	iDtableLabel.grid(row = 0, column = 0)
 
@@ -155,35 +174,44 @@ def displaysearch(c,sql):
 	thermlabel = Label(table, text = "Coefficient of Thermal\nExpansion Range (um/mC)")
 	thermlabel.grid(row = 0, column = 10, columnspan = 2)
 
+	#Filling out table based on search results
 	for r in range(len(rows)):
 		for x in range(len(rows[r])):
 			resultstable[r][x] = Label(table, text=(rows[r][x]))
 			resultstable[r][x].grid(row = r+1, column = x, sticky = "ew")
 
 			if x%2 == 0:
+				#Color coding every other individual entry for ease to see 
 				resultstable[r][x].configure(bg = "#d3d3d3")
 
+	#Number of rows and columns
 	numrows = len(rows)
 	numcols = len(rows[0])
 #	for i in range(numcols):
 #		ttk.Separator(table, orient = "vertical").grid(column = i, row = 1, rowspan = numrows + 1, sticky = 'nse')
 
+	#
 	for i in range(numrows):
 		ttk.Separator(table, orient = "horizontal").grid(column = 0, row = i, columnspan = numcols+1, sticky = "sew")
 
+#Refresh page buttton
 	refresh = Button(wind, text = "Refresh Page", command = lambda: reloadtable(resultstable, rows, sql, table, canvas))
 	refresh.grid(row = 2, column = 0, ipadx = 5, pady = 10)
 	buttonrefresh = [refresh]
 	buttonformat(buttonrefresh)
 	table.update_idletasks();
 
-
-
 	canvas.config(scrollregion=canvas.bbox("all"))
 
 
+#Reload the table frame 
+#results table - the table with prexisting data
+#rows - the data itself
+#sql - the sql statement
+#table/canvas - formatting frames
 def reloadtable(resultstable, rows, sql, table, canvas):
 
+	#clearing table
 	for r in range(len(rows)):
 		for x in range(len(rows[r])):
 			resultstable[r][x].destroy()
@@ -197,27 +225,31 @@ def reloadtable(resultstable, rows, sql, table, canvas):
 	rows = c.fetchall()
 	numrows = len(rows)
 	numcols = len(rows[0])
-	resultstable2 = [[Label() for i in range (len(rows[0]))] for i in range(len(rows)) ]
+	resultstable = [[Label() for i in range (len(rows[0]))] for x in range(len(rows)) ]
 
 
+	#fill out the table
 	for r in range(len(rows)):
 		for x in range(len(rows[r])):
-			resultstable2[r][x]=Label(table, text=(rows[r][x]))
-			resultstable2[r][x].grid(row = r+1, column = x, sticky = "ew")
+			resultstable[r][x]=Label(table, text=(rows[r][x]))
+			resultstable[r][x].grid(row = r+1, column = x, sticky = "ew")
 			if x%2 == 0:
-				resultstable2[r][x].configure(bg = "#d3d3d3")
+				resultstable[r][x].configure(bg = "#d3d3d3")
 
+	#reset the separator
 	for i in range(numrows):
 		ttk.Separator(table, orient = "horizontal").grid(column = 0, row = i, columnspan = numcols+1, sticky = "sew")
 
+	canvas.update()
+	table.update_idletasks()
 
-	table.update_idletasks();
-
+	#rebind the canvas scroll region
 	canvas.config(scrollregion=canvas.bbox("all"))
 
 
 
-
+#Set of where statement logical operators to fill out the query to our database
+		### Make it a function to pass values instead of just having everything be global variables
 def wherestatement():
 	out = " WHERE "
 	first = True
@@ -307,14 +339,15 @@ def wherestatement():
 			out += "thermcoeffhi <= {} ".format(maxtherm.get())
 			first = False
 
+	#name contains
 	if len(nameval.get()) != 0:
 		if not first:
 			out +="AND "
 		out += "name LIKE '%{}%' ".format(nameval.get())
 
-
 	return out
 
+#Our search function, simple logic here to connect to database and see if we receive all or based on conditions
 def search():
 	conn = sqlite3.connect(databaseroute)
 	c = conn.cursor()
@@ -327,6 +360,7 @@ def search():
 		displaysearch(c,sql)
 
 
+#Opens a new window to edit some entry based off of user provided ID # 
 def edit():
 
 	wind = Toplevel(root)
@@ -430,6 +464,7 @@ def edit():
 	editbuttons = [commitchanges, deleteentry]
 	buttonformat(editbuttons)
 
+#Calls a query to our database to delete something based off of our provided ID value
 def removeentry(idval):
 	sql = ("DELETE FROM metalmechproperties WHERE id = {}".format(idval))
 	conn =sqlite3.connect(databaseroute)
@@ -437,6 +472,7 @@ def removeentry(idval):
 	curr.execute(sql)
 	conn.commit()	
 
+#Set of logical conditions to add to our set statement for what to change
 def setvalues(mechpropset):
 	output = ""
 	first = True
@@ -509,7 +545,7 @@ def setvalues(mechpropset):
 
 
 
-
+#Calls the update function of our SQL to update some value
 def editentry(entryedits):
 	sql = ("UPDATE metalmechproperties SET")
 	sql += setvalues(entryedits)
@@ -522,10 +558,13 @@ def editentry(entryedits):
 	clearentries(entryedits)
 
 
-
+### ----- BELOW IS OUR MAIN LANDING PAGE ----- ###
 '''----------------------------------------------------------------------------------------------------------'''
+# Our title 
+additiontitle = Label(root, text = "\nADD MATERIAL TO DATABASE:\nPlease search for the name of the metal before adding and see if values need to be edited")
+additiontitle.grid(row=0, column = 0, columnspan = 4)
 
-
+# Our entry text boxes
 name = Entry(root, width=20)
 name.grid(row=1,column=1,padx=10)
 
@@ -559,13 +598,9 @@ thermcoefflo.grid(row=6,column=1)
 thermcoeffhi = Entry(root, width=20)
 thermcoeffhi.grid(row=6,column=3)
 
-
-additiontitle = Label(root, text = "\nADD MATERIAL TO DATABASE:\nPlease search for the name of the metal before adding and see if values need to be edited")
-additiontitle.grid(row=0, column = 0, columnspan = 4)
-
+#Our labels
 namelabel = Label(root, text = "Name")
 namelabel.grid(row=1,column=0)
-
 
 yieldlolabel = Label(root, text = "Lower Yield Strength (MPa)")
 yieldlolabel.grid(row=2,column=0)
@@ -597,9 +632,11 @@ ctelolabel.grid(row=6,column=0)
 ctehilabel = Label(root, text = "Higher Coefficient of Thermal Expansion (um/mC)")
 ctehilabel.grid(row=6,column=2)
 
+#Our button
 submit_btn = Button(root, text = "Add Record to Database", command = submit)
 submit_btn.grid(row = 7, column = 0, columnspan = 4, pady = 10, ipadx = 200)
 
+#Line separator and instructions to search our database
 searchtitle = Label(root, text = "\n________________________________________________________________________________________________________________________________________________________________________________\n\n\nSEARCH DATBASE FOR MATERIAL: \n Leave blank if value is unknown or unneeded \n Leave checkbox 'min' blank and type input next to 'min' to search for materials with input within range. \n Check box 'min' to search for material where range value is greater than or equal to input \n Check box 'max' to search for material where range value is less than or equal to input \n Leave all blank to look at entire database")
 searchtitle.grid(row = 9, column = 0, columnspan = 4)
 
@@ -612,6 +649,7 @@ namesrch.grid(row = 0, column = 0)
 nameval = Entry(searchframe, width=30)
 nameval.grid(row = 0, column=1, columnspan = 4,ipadx = 82)
 
+#Below is separated by what property we are searching for, each has check boxes, entry boxes, and labels
 '''----------------------------------------------------------------------------------------------------------'''
 
 yieldsearch = Label(searchframe, text = "Yield Strength (MPa)")
@@ -706,15 +744,18 @@ maxtherm = Entry(searchframe, width=20)
 maxtherm.grid(row=5,column=4)
 
 '''----------------------------------------------------------------------------------------------------------'''
+#Our search button
 srch_btn = Button(searchframe, text = "Search", command = search)
 srch_btn.grid(row = 6, column = 0, columnspan = 5, pady = 5, ipadx = 250)
 
+#Our delete or edit entry button that opens new page
 edittitle = Label(root, text="________________________________________________________________________________________________________________________________________________________________________________\n")
 edittitle.grid(row = 11, column = 0, columnspan = 4)
 
 edit_btn = Button(root, text = "Edit or Delete an Entry", command = edit)
 edit_btn.grid(row = 12, column = 0, columnspan = 4, pady = 5, ipadx = 210)
 
+#Listing our labels to be passed onto the formatting functions
 mylabels = [edittitle, namelabel, yieldhilabel, yieldlolabel, tenslolabel, tenshilabel, elonghilabel, elonglolabel, hardhilabel, hardlolabel, ctelolabel, ctehilabel, searchtitle, additiontitle, namesrch, yieldsearch, ultsearch, elosearch, hardsearch, ctesearch]
 myentries = [name, yieldstrhi, yieldstrlo, ulttensilstrhi, ulttensilstrlo, elongationhi, elongationlo, hardnesshi, hardnesslo, thermcoeffhi, thermcoefflo, nameval, mintherm, minhard, minelo, minult, minyield, maxtherm, maxhard, maxelo, maxult, maxyield]
 mychecks = [c1, c2, c3, c4, c5, c6, c7 ,c8 ,c9 ,c10]
