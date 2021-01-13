@@ -48,7 +48,6 @@ from multiprocessing.managers import BaseManager
 
 
 databaseroute = os.path.join(os.path.expanduser("~"),"Lordstown Motors Corp", "Battery & Propulsion Team - General","Documents", "materials.db")
-print(databaseroute)
 root = Tk()
 root.title('Lordstown Motors Materials Database')
 root.geometry("900x650")
