@@ -1,19 +1,25 @@
-setup(
-		name = "lordstown-materials-database=editor",
-		version="1.0.0",
-		description = "Explore the materials database and look at its properties",
-		long_description = README,
-		long_description_content_type="text/markdown",
-		url = "https://github.com/ronhoang/LordstownMaterialsDatabase",
-		author="Ronald Hoang",
-		author_email="rpchoang@gmail.com",
-		classifiers=[
-			"Programming Language :: Python",
-			"Programming Language :: Python :: 2",
-			"Programming Language :: Python :: 3",
-			],
-		packages = ["LMCGui"],
-		include_package_data = True,
-		entry_points={"console_scripts": ["LMCSQLGui=SQLiteGUI.__main__:main"]},
+from distutils.core import setup
+import py2exe
+from tkinter import *
+from PIL import ImageTk,ImageTk
+from tkinter import PhotoImage
+from tkinter import ttk
+import sqlite3
+import os
+import sys
+import multiprocessing
+multiprocessing.set_start_method('spawn')
 
+from multiprocessing.managers import BaseManager
+
+sys.argv.append('py2exe')
+
+setup(
+options = { 'py2exe': {'bundle_files': 2, 'compressed': True}},
+	windows=[{
+		'script':"SQLiteGUI.py",
+		'icon_resources': [(1, 'Lordstown.ICO')]
+	 }],
+	zipfile = None,
+	name = "LMC B&P MaterialsDatabase"
 )

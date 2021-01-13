@@ -3,6 +3,11 @@ from PIL import ImageTk,ImageTk
 from tkinter import PhotoImage
 from tkinter import ttk
 import sqlite3
+import os
+import multiprocessing
+multiprocessing.set_start_method('spawn')
+
+from multiprocessing.managers import BaseManager
 
 
 """
@@ -13,7 +18,7 @@ import sqlite3
  Datbase is based off of SQLite3
  GUI is written in tkinter
 
- ------FEATURES V1.0--------
+ ------FEATURES V1.0.1--------
  Add materials to database, if empty then will leave the corresponding area in the database blank, still able to edit later
  Search database based on any of the mechanical properties or a combination of any of the properties 
  		Search based on input being in range, or known material property being within bounds we list
@@ -30,21 +35,17 @@ import sqlite3
  TODO
  - Add more mechanical properties: Density, Thermal Conductivity, Electrical Conductivity, Melting Point, Youngs Modulus, Specific Heat Capacity
  - Implement features to search for either chemical properties/composition or mechanical properties or both
- - Implement a name search function for "close enough" strings
+ - Implement a better "close enough" name search
  - Plan to have a less memory intensive way of looking at all entries without having to list them all at once
- - Report Errors
  - Have a main menu rather than a mish mash of stuff together
  - Find more data to add to database
- - Set up web server to host database and establish a way to connnect to the database and query remotely
  - Implement Entry box sanity checkers to ensure only correct input is passed through
- - Improve UI/UX
  - Make an executable
- - Fix refresh button, does update the bottom of the table in the user interface when refresh button is hit, but does update the actual database still
+ - Bug fix refresh button, deleting/adding an entry will sometimes make it so the scrolling window doesn't resize properly but does update the actual database still
 
 
 """
-
-
+databaseroute = os.path.join(os.path.expanduser("~"),"Lordstown Motors Corp", "Battery & Propulsion Team - General","Documents", "materials.db")
 root = Tk()
 root.title('Lordstown Motors Materials Database')
 root.geometry("900x650")
@@ -76,7 +77,7 @@ def clearentries(entries):
 
 
 def submit():
-	conn = sqlite3.connect("materials.db")
+	conn = sqlite3.connect(databaseroute)
 	c = conn.cursor()
 	sql = ("INSERT INTO metalmechproperties(name, yieldstrlo, yieldstrhi, ulttensilestrlo, ulttensilestrhi, hardnesslo, hardnesshi, elongationlo, elongationhi, thermcoefflo, thermcoeffhi) VALUES (?,?,?,?,?,?,?,?,?,?,?)")
 	mechprop = (name.get(), yieldstrlo.get(), yieldstrhi.get(), ulttensilstrlo.get(), ulttensilstrhi.get(), hardnesslo.get(), hardnesshi.get(), elongationlo.get(), elongationhi.get(), thermcoefflo.get(), thermcoeffhi.get())
@@ -99,8 +100,8 @@ def displaysearch(c,sql):
 	c.execute(sql)
 	rows = c.fetchall()
 
-	for r in rows:
-		print(r)
+	#for r in rows:
+	#	print(r)
 
 	wind = Toplevel(root)
 	wind.title('Lordstown Motors Materials Database Search Results')
@@ -188,7 +189,7 @@ def reloadtable(resultstable, rows, sql, table, canvas):
 	table.update_idletasks()
 	canvas.update()
 
-	conn = sqlite3.connect("materials.db")
+	conn = sqlite3.connect(databaseroute)
 	c = conn.cursor()
 	c.execute(sql)
 	rows = c.fetchall()
@@ -250,8 +251,6 @@ def wherestatement():
 		if maxvarult.get():
 			out += "ulttensilestrhi <= {} ".format(maxult.get())
 			first = False
-
-
 
 	if len(minelo.get()) != 0:
 		if not first:
@@ -315,7 +314,7 @@ def wherestatement():
 	return out
 
 def search():
-	conn = sqlite3.connect("materials.db")
+	conn = sqlite3.connect(databaseroute)
 	c = conn.cursor()
 	sql = ("SELECT * FROM metalmechproperties")
 	if not isempty(myentries):
@@ -431,7 +430,7 @@ def edit():
 
 def removeentry(idval):
 	sql = ("DELETE FROM metalmechproperties WHERE id = {}".format(idval))
-	conn =sqlite3.connect("materials.db")
+	conn =sqlite3.connect(databaseroute)
 	curr = conn.cursor()
 	curr.execute(sql)
 	conn.commit()	
@@ -514,7 +513,7 @@ def editentry(entryedits):
 	sql += setvalues(entryedits)
 	sql += ("WHERE id = {}".format(entryedits[0].get()))
 
-	conn = sqlite3.connect("materials.db")
+	conn = sqlite3.connect(databaseroute)
 	curr = conn.cursor()
 	curr.execute(sql)
 	conn.commit()
