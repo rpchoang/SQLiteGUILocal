@@ -3,6 +3,7 @@
  @ORIGINAL AUTHOR - RONALD HOANG 1/6/2021 rpchoang@gmail.com
 
  This program gives us an easy to use GUI to explore a Lordstown Motor's material database and its mechanical properties
+ 
  Python Program to edit, search, add, and delete from this database, we look at yield str, ultimate tensile str, elongation at yield, hardness, and CTE
  
  Datbase is based off of SQLite3
