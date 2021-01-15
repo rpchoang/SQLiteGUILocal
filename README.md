@@ -3,7 +3,6 @@
  @ORIGINAL AUTHOR - RONALD HOANG 1/6/2021 rpchoang@gmail.com
 
  This program gives us an easy to use GUI to explore a Lordstown Motor's material database and its mechanical properties
- 
  Python Program to edit, search, add, and delete from this database, we look at yield str, ultimate tensile str, elongation at yield, hardness, and CTE
  
  Datbase is based off of SQLite3
@@ -27,11 +26,9 @@
 	"pip install pillow"
 
 
- ------FEATURES V1.2.0--------
+ ------FEATURES V1.2.0-------- 	1/13/2021
  
  INSTRUCTIONS TO GET STARTED USING THIS PROGRAM
- 
- 	1/13/2021
 	
  - Now connected to Battery and Propulsion team one drive! Multiple people can now use and update the same database. 
  		Please make sure you are synced to the Battery & Propulsion Team general folder. Please check to see if your path to the materials database would be:
@@ -42,13 +39,11 @@
  - I don't have a publishing license so Windows Defender will say its protecting your PC, you can click More Info -> Run Anyways
 
  ------FEATURES V1.0.1--------
- 
  	1/8/2021
 	
  - Added a search page refresh button to see any updates
 
   ------FEATURES V1.0.0--------
-  
   	1/6/2021
 	
  - Add materials to database, if empty then will leave the corresponding area in the database blank, still able to edit later
