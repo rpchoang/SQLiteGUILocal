@@ -17,7 +17,8 @@
 	"pip install pillow"
 s
 
- ------FEATURES V1.2.0-------- INSTRUCTIONS TO GET STARTED USING THIS PROGRAM
+ ------FEATURES V1.2.0--------
+ INSTRUCTIONS TO GET STARTED USING THIS PROGRAM
  	1/13/2021
  - Now connected to Battery and Propulsion team one drive! Multiple people can now use and update the same database. 
  		Please make sure you are synced to the Battery & Propulsion Team general folder. Please check to see if your path to the materials database would be:
