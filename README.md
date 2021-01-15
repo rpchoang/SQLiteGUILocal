@@ -1,4 +1,4 @@
-# SQLiteGUILocal
+# Lordstown Materials Database
 
  @ORIGINAL AUTHOR - RONALD HOANG 1/6/2021 rpchoang@gmail.com
 
