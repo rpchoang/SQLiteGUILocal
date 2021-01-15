@@ -22,7 +22,7 @@ from multiprocessing.managers import BaseManager
  	1/13/2021
  - Now connected to Battery and Propulsion team one drive! Multiple people can now use and update the same database. 
  		Please make sure you are synced to the Battery & Propulsion Team general folder. Please check to see if your path to the materials database would be:
- 		"C:/Users/<YOUR USENAME>/Lordstown Motors Corp/Battery & Propulsion Team - General/Documents/materials.db"
+ 		"C:/Users/<YOUR USENAME>/Lordstown Motors Corp/Battery & Propulsion Team - General/Documents/DATABASE/materials.db"
  		ONLY PEOPLE ON THE PROPULSION TEAM CAN ACCESS THIS DATABASE
  - Created an executable file for easier use! Please ensure that you have the LMCMaterialsDatabase.exe and Lordstown.ico in the same folder
  		You can make a shortcut the the datbase exe and leave it on your desktop
@@ -59,7 +59,7 @@ from multiprocessing.managers import BaseManager
 """
 
 #Getting path relative to individual's computer
-databaseroute = os.path.join(os.path.expanduser("~"),"Lordstown Motors Corp", "Battery & Propulsion Team - General","Documents", "materials.db")
+databaseroute = os.path.join(os.path.expanduser("~"),"Lordstown Motors Corp", "Battery & Propulsion Team - General","Documents", "DATABASE" ,"materials.db")
 
 #Creating main menu
 root = Tk()
